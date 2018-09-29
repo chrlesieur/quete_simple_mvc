@@ -12,7 +12,9 @@
 
 <?php
 // connection BDD (définir les constantes dans un fichier app.php qui sera inclus)
-require '../app/db.php';
+
+        require __DIR__ . '/../src/Controller/ItemController.php';
+    
 $pdo = new \PDO(DSN, USER, PASS);
 
 // requete SQL 
