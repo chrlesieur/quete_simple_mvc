@@ -1,0 +1,15 @@
+{
+    "name": "chris/quete_simple_mvc",
+    "authors": [
+        {
+            "name": "Christophe LESIEUR",
+            "email": "chrlesieur@free.fr"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    }
+}
