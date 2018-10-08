@@ -1,15 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head> ... </head>
-<body>
-<section>
+
+{% include 'layout.html.twig' %}
+{% block content %}
     <h1>Items</h1>
     <ul>
-        <?php foreach ($items as $item) : ?>
-            <li><?= $item['title'] ?></li>
-        <?php endforeach ?>
+        {% for item in items %}
+            <li>{{ item.title}}</li>
+        {% endfor %}
     </ul>
-</section>
-</body>
-</html>
+{% endblock %}
 

@@ -1,15 +1,9 @@
 
-
-<!DOCTYPE html>
-<html>
-<head> ... </head>
-<body>
-   <main>
-    <h1>Item <?= $item['title'] ?></h1>
+{% include 'layout.html.twig' %}
+{% block content %}
+    <h1>Item {{ items.title }}</h1>
 <ul>
-    <li>Id : <?= $item['id'] ?></li>
+    <li>Id : {{ items.id }}</li>
 </ul>
 <a href='/public/index.php?route=items'>Back to list</a>
-</main>
-</body>
-</html>
+{% endblock %}

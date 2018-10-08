@@ -13,7 +13,7 @@ $routes = [
 
     'Category' => [
         ['index', '/category', 'GET'],
-        ['show', 'category/{id}', 'GET'],
+        ['show', '/category/{id}', 'GET'],
     ],
 
 ];

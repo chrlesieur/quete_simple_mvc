@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head> ... </head>
-<body>
-<section>
+{% include 'layout.html.twig' %}
+{% block content %}
     <h1>Categories</h1>
     <ul>
-        <?php foreach ($categories as $category) : ?>
-            <li><?= $category['name'] ?></li>
-        <?php endforeach ?>
+        {% for category in categories %}
+            <li>{{category.name}}</li>
+        {% endfor %}
     </ul>
-</section>
-</body>
-</html>
+{% endblock  %}

@@ -12,7 +12,7 @@ namespace Model;
 require __DIR__ . '/../../app/db.php';
 class CategoryManager
 {
-    public function selectAllCategory(): array
+    public function selectAllCategories(): array
     {
         $pdo = new \PDO(DSN, USER, PASS);
         $query = "SELECT * FROM category";
