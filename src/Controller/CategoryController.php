@@ -8,28 +8,23 @@
 
 namespace Controller;
 use Model\CategoryManager;
-use Twig_Loader_Filesystem;
-use Twig_Environment;
 
-class CategoryController
+
+class CategoryController extends AbstractController
 {
-    private $twig;
 
-    public function __construct()
-    {
-        $loader = new Twig_Loader_Filesystem(__DIR__.'/../View');
-        $this->twig = new Twig_Environment($loader);
-    }
+
+
     public function index()
     {
-        $CategoriesManager = new CategoryManager();
-        $categories = $CategoriesManager->selectAllCategories();
+        $CategoriesManager = new CategoryManager($this->pdo);
+        $categories = $CategoriesManager->selectAll();
         return $this->twig->render('Category/category.html.twig', ['categories' => $categories]);
     }
     public function show(int $id)
     {
-        $CategoryManager = new CategoryManager();
-        $category = $CategoryManager->selectOneCategory($id);
+        $CategoryManager = new CategoryManager($this->pdo);
+        $category = $CategoryManager->selectOneById($id);
         return $this->twig->render('Category/showCategory.html.twig', ['category' => $category]);
 
     }

@@ -9,21 +9,21 @@
 namespace Model;
 
 
-require __DIR__ . '/../../app/db.php';
-class CategoryManager
+
+class CategoryManager extends AbstractManager
 {
     public function selectAllCategories(): array
     {
-        $pdo = new \PDO(DSN, USER, PASS);
+
         $query = "SELECT * FROM category";
-        $res = $pdo->query($query);
+        $res = $pdo->query($query, Category::class);
         return $res->fetchAll();
     }
     public function selectOneCategory(int $id) : array
     {
-        $pdo = new \PDO(DSN, USER, PASS);
+
         $query = "SELECT * FROM category WHERE id = :id";
-        $statement = $pdo->prepare($query);
+        $statement = $pdo->prepare($query, Category::class);
         $statement->bindValue(':id', $id, \PDO::PARAM_INT);
         $statement->execute();
         // contrairement à fetchAll(), fetch() ne renvoie qu'un seul résultat
