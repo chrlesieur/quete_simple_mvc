@@ -32,24 +32,52 @@ class ItemController extends AbstractController
     public function add()
     {
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $itemManager = new ItemManager($this->getPdo());
-            $item = new Item();
-            $item->setTitle($_POST['title']);
-            $id = $itemManager->insert($item);
-            header('Location:/item/' . $id);
+        $error = '';
+        if (!empty($_POST)) {
+            if (isset($_POST['item']) && !empty($_POST['item'])) {
+                // création d'un nouvel objet Item et hydratation avec les données du formulaire
+                $item = new Item();
+                $item->setTitle($_POST['item']);
+                $itemManager = new ItemManager($this->pdo);
+                // l'objet $item hydraté est simplement envoyé en paramètre de insert()
+                $itemManager->insert($item);
+                // si tout se passe bien, redirection
+                header('Location: /');
+                exit();
+            } else {
+                $error = "The item's name is required.";
+            }
         }
-
-        return $this->twig->render('Item/add.html.twig');
+            return $this->twig->render('Item/add.html.twig', ['error' => $error]);
     }
+
+
+
+
     public function edit(int $id): string
     {
         $itemManager = new ItemManager($this->getPdo());
         $item = $itemManager->selectOneById($id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $item->setTitle($_POST['title']);
-            $itemManager->update($item);
+            if (!empty($_POST)) {
+                if (isset($_POST['id']) && !empty($_POST['id'])) {
+                    if (isset($_POST['item']) && !empty($_POST['item'])) {
+                        $item->setTitle($_POST['item']);
+                        $itemManager->update($item);
+                        header('Location: /item/'.intval($_POST['id']));
+                        exit();
+                    } else {
+                        $error = "The new item's name is required";
+                    }
+                } else {
+                    $error = 'Error was found. Please try again.';
+                }
+            }
+            return $this->twig->render('Item/edit.html.twig', [
+                'error' => $error,
+                'item' => $item
+            ]);
         }
 
         return $this->twig->render('Item/edit.html.twig', ['item' => $item]);

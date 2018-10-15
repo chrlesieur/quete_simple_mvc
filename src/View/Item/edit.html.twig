@@ -1,7 +1,20 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
-    <h1>Edit item {{ item.title }}</h1>
-    {% include 'Item/form.html.twig' %}
-    <a href="/item/{{ item.id }}">Back</a>
+{% block title %}
+    Edit Item {{ item.title }}
+{% endblock %}
+
+{%  block content %}
+    <section>
+        <h1>Edit item {{ item.title }}</h1>
+        <form method="post" action="">
+            <label for="item">New Item's Name</label>
+            <input type="hidden" name="id" value="{{ item.id }}" />
+            <input type="text" name="item" id="item" value="{{ item.title }}" />
+            <button type="submit" name="send" >Edit</button>
+        </form>
+        <span style="color:red">{{ error }}</span>
+        <hr>
+        <p><a href='/'>Go to Items list</a></p>
+    </section>
 {% endblock %}

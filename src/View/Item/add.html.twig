@@ -1,6 +1,19 @@
 {% extends 'layout.html.twig' %}
 
-{% block content %}
-    <h1>Add a new item</h1>
-    {% include 'Item/form.html.twig' %}
+{% block title %}
+    Add Item
+{% endblock %}
+
+{%  block content %}
+    <section>
+        <h1>Add item</h1>
+        <form method="post" action="/item/add">
+            <label for="item">Item's Name</label>
+            <input type="text" name="item" id="item" value="" />
+            <button type="submit" name="send" >Add</button>
+        </form>
+        <span style="color:red">{{ error }}</span>
+        <hr>
+        <p><a href='/'>Go to Items list</a></p>
+    </section>
 {% endblock %}
